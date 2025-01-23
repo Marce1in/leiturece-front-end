@@ -30,9 +30,13 @@ export default function HomePage() {
             >
               Sobre
             </button>
-            <a href="#servicos" className="hover:underline text-gray-300">
-              Serviços
-            </a>
+            <button
+                onClick={() => router.push('/servicos')}
+                className="hover:underline text-gray-300 bg-transparent border-none cursor-pointer"
+              >
+                Serviços
+              </button>
+
             <button
               onClick={() => window.open('https://wa.me/5553999467169', '_blank')}
               className="hover:underline text-gray-300 bg-transparent border-none cursor-pointer"

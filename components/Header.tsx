@@ -34,9 +34,12 @@ export default function Header() {
           >
             Serviços
           </button>
-          <a href="#contato" className="hover:underline text-gray-300">
-            Contato
-          </a>
+          <button
+              onClick={() => window.open('https://wa.me/5553999467169', '_blank')}
+              className="hover:underline text-gray-300 bg-transparent border-none cursor-pointer"
+            >
+              Fale Conosco
+            </button>
         </nav>
 
         {/* Botões de Ação */}

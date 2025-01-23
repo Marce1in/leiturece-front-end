@@ -24,15 +24,21 @@ export default function HomePage() {
 
           {/* Navegação */}
           <nav className="hidden md:flex space-x-6">
-            <a href="#sobre" className="hover:underline text-gray-300">
+            <button
+              onClick={() => handleNavigate('/sobre')}
+              className="hover:underline text-gray-300 bg-transparent border-none cursor-pointer"
+            >
               Sobre
-            </a>
+            </button>
             <a href="#servicos" className="hover:underline text-gray-300">
               Serviços
             </a>
-            <a href="#contato" className="hover:underline text-gray-300">
-              Contato
-            </a>
+            <button
+              onClick={() => window.open('https://wa.me/5553999467169', '_blank')}
+              className="hover:underline text-gray-300 bg-transparent border-none cursor-pointer"
+            >
+              Fale Conosco
+            </button>
           </nav>
 
           {/* Botões de Ação */}
@@ -60,7 +66,6 @@ export default function HomePage() {
           </button>
         </div>
       </header>
-
       {/* Hero Section */}
       <section id="home" className="flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-6 py-20 mt-20">
         <div className="md:w-1/2 space-y-6">

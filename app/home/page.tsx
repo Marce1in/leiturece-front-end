@@ -1,23 +1,44 @@
-import { Carousel } from 'react-responsive-carousel'; // Biblioteca para carrosel
-import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import './App.css';
-import img1 from '../../public/images/img1.jpeg';
-import img2 from '../../public/images/img2.jpeg';
-import img3 from '../../public/images/img3.jpeg';
-import img4 from '../../public/images/img4.jpeg';
-import img5 from '../../public/images/img5.jpeg';
-import img6 from '../../public/images/img12.jpeg';
-import img7 from '../../public/images/img7.jpeg';
-import img8 from '../../public/images/img8.jpeg';
-import img9 from '../../public/images/img9.jpeg';
-import img10 from '../../public/images/img10.jpeg';
+'use client';
 import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import '../home/App.css';
 
-function App() {
+const Carousel = ({ images }) => {
   return (
-    <div className="app-container">
-      {/* CABEÇALHO*/}
-      <header className="header">
+    <div className="w-full max-w-full mt-4">
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        spaceBetween={20}
+        slidesPerView={3}
+        navigation
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        className="rounded-lg shadow-xl"
+      >
+        {images.map((item, index) => (
+          <SwiperSlide key={index} className="flex flex-col items-center">
+            <div className="bg-white p-6 rounded-lg shadow-md text-center">
+              <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
+              <img
+                src={item.src}
+                alt={item.title}
+                className="w-48 h-48 object-cover rounded-full mx-auto mb-4"
+              />
+              <p className="text-sm text-gray-600">{item.description}</p>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
+  );
+};
+
+const Header = () => (
+  <header className="header">
         <img src="image" className="logo" alt="LeitureCe"/>
         <div className="posidi">
           <nav className="nav-bar">
@@ -38,96 +59,61 @@ function App() {
           </div>
         </div>  
       </header>
+);
 
-      {/* Conteúdo Principal */}
-      <main className="main-content" >
-        {/* Primeira Parte: Carrossel - Trilhas adiquiridas
-        Usar imagens ilustrativas */}
-         <section className="carousel-section">
-          <h2>Trilhas Adiquiridas</h2>
-          <Carousel autoPlay infiniteLoop showThumbs={false} showStatus={false} centerMode centerSlidePercentage={25} emulateTouch swipeable>
-            <div>
-              <img src={img1} alt="Livro 1" />
-              <p className="legend">Comunicação Assertiva</p>
-              <button>Entar</button>
-            </div>
-            <div>
-              <img src={img2} alt="Livro 2" />  
-              <p className="legend">Resiliência</p>
-              <button>Entrar</button>
-            </div>
-            <div>
-              <img src={img3} alt="Livro 3" />
-              <p className="legend">Inteligência Emocional</p>
-              <button>Entrar</button>
-            </div>
-            <div>
-              <img src={img4} alt="Livro 4" />
-              <p className="legend">Ética De Trabalho</p>
-              <button>Entrar</button>
-            </div>
-            <div>
-              <img src={img5} alt="Livro 5" />
-              <p className="legend">Trabalho Em Equipe</p>
-              <button>Entrar</button>
-            </div>
-          </Carousel>
-        </section>
-        {/* Segunda divisão: Carrossel de Opções */}
-        <section className="carousel-section">
-          <h2>Adquira Novas Trilhas</h2>
-          <Carousel autoPlay infiniteLoop showThumbs={false} showStatus={false} centerMode centerSlidePercentage={25} emulateTouch swipeable>
-            <div>
-              <img src={img6} alt="Objetivo 1" />
-              <p className="legend">Gerenciamento De Tempo</p>
-              <button>Entar</button>
-            </div>
-            <div>
-              <img src={img7} alt="Objetivo 2" />
-              <p className="legend">Liderança</p>
-              <button>Entar</button>
-            </div>
-            <div>
-              <img src={img8} alt="Objetivo 3" />
-              <p className="legend">Negociação</p>
-              <button>Entar</button>
-            </div>
-            <div>
-              <img src={img9} alt="Objetivo 4" />
-              <p className="legend">Pensamento Crítico</p>
-              <button>Entar</button>
-            </div>
-            <div>
-              <img src={img10} alt="Objetivo 5" />
-              <p className="legend">Pensamento Criativo</p>
-              <button>Entar</button>
-            </div>
-          </Carousel>
-        </section>
-        
+const Footer = () => (
+  <footer className="footer">
+    <img src="COLOCAR IMAGEM DA LOGO" className="logo" alt="LeitureCe"/>
+      <nav className="footer-nav">
+        <button className="footer-button">Política de Privacidade</button>
+        <button className="footer-button">Termos de Uso</button>
+        <button className="footer-button">Suporte</button>
+      </nav>
+  </footer>
+);
 
-        {/* Segunda parte: Seleção de Opções */}
-        {/* <section className="options-section">
-          <h2>Escolha seu Objetivo</h2>
-          <div className="options-buttons">
-            <button className="option-button">Aprender Comunicação</button>
-            <button className="option-button">Fortalecer Liderança</button>
-            <button className="option-button">Melhorar Colaboração</button>
-          </div>
-        </section> */}
+const HomePage = () => {
+  const carouselAdiquirido = [
+    { src: '/images/img1.jpeg', title: 'Comunicação Assertiva', description: 'Comunicação Assertiva' },
+    { src: '/images/img2.jpeg', title: 'Resiliência', description: 'Resiliência' },
+    { src: '/images/img3.jpeg', title: 'Inteligência Emocional', description: 'Inteligência Emocional' },
+    { src: '/images/img4.jpeg', title: 'Comunicação Assertiva', description: 'Comunicação Assertiva' },
+    { src: '/images/img5.jpeg', title: 'Resiliência', description: 'Resiliência' },
+    { src: '/images/img6.jpeg', title: 'Inteligência Emocional', description: 'Inteligência Emocional' },
+    { src: '/images/img7.jpeg', title: 'Comunicação Assertiva', description: 'Comunicação Assertiva' },
+    { src: '/images/img8.jpeg', title: 'Resiliência', description: 'Resiliência' }
+  ];
+
+  const carouselSugestao = [
+    { src: '/images/img1.jpeg', title: 'Liderança', description: 'Habilidades de Liderança' },
+    { src: '/images/img2.jpeg', title: 'Criatividade', description: 'Criatividade no Trabalho' },
+    { src: '/images/img3.jpeg', title: 'Adaptação', description: 'Adaptação a Mudanças' },
+    { src: '/images/img4.jpeg', title: 'Comunicação Assertiva', description: 'Comunicação Assertiva' },
+    { src: '/images/img5.jpeg', title: 'Resiliência', description: 'Resiliência' },
+    { src: '/images/img6.jpeg', title: 'Inteligência Emocional', description: 'Inteligência Emocional' },
+    { src: '/images/img7.jpeg', title: 'Comunicação Assertiva', description: 'Comunicação Assertiva' },
+    { src: '/images/img8.jpeg', title: 'Resiliência', description: 'Resiliência' }
+  ];
+
+  const carousel3 = [
+    { src: '/images/img9.jpeg', title: 'Empatia', description: 'Empatia no Trabalho' },
+    { src: '/images/img10.jpeg', title: 'Autoconhecimento', description: 'Desenvolvimento Pessoal' }
+  ];
+
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      <main className="flex-grow flex flex-col items-center bg-gray-100 p-6">
+        <h3 className="text-lg font-semibold text-gray-800">Adquirido</h3>
+        <Carousel images={carouselAdiquirido} />
+        <h3 className="text-lg font-semibold text-gray-800">Sugestão</h3>
+        <Carousel images={carouselSugestao} />
+        <h3 className="text-lg font-semibold text-gray-800">Sugestão</h3>
+        <Carousel images={carousel3} />
       </main>
-
-      {/* Rodapé */}
-      <footer className="footer">
-        <img src="COLOCAR IMAGEM DA LOGO" className="logo" alt="LeitureCe"/>
-        <nav className="footer-nav">
-          <button className="footer-button">Política de Privacidade</button>
-          <button className="footer-button">Termos de Uso</button>
-          <button className="footer-button">Suporte</button>
-        </nav>
-      </footer>
+      <Footer />
     </div>
   );
-}
+};
 
-export default App;
+export default HomePage;

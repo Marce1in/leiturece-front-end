@@ -17,6 +17,11 @@ const Carousel = ({ images }) => {
         navigation
         pagination={{ clickable: true }}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
+        breakpoints={{
+          320: { slidesPerView: 1 },
+          640: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+        }}
         className="rounded-lg shadow-xl"
       >
         {images.map((item, index) => (
@@ -26,7 +31,7 @@ const Carousel = ({ images }) => {
               <img
                 src={item.src}
                 alt={item.title}
-                className="w-48 h-48 object-cover rounded-full mx-auto mb-4"
+                className="w-48 h-48 flex items-center justify-center overflow-hidden rounded-full mx-auto mb-4"
               />
               <p className="text-sm text-gray-600">{item.description}</p>
             </div>

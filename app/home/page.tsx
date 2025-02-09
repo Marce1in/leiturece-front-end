@@ -1,4 +1,6 @@
-import { Carousel } from 'react-responsive-carousel'; // Biblioteca para carrosel
+'use client'
+
+import  {Carousel}  from 'react-responsive-carousel'; // Biblioteca para carrosel
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './App.css';
 import img1 from '../../public/images/img1.jpeg';
@@ -12,6 +14,7 @@ import img8 from '../../public/images/img8.jpeg';
 import img9 from '../../public/images/img9.jpeg';
 import img10 from '../../public/images/img10.jpeg';
 import React from 'react';
+import Image from 'next/image';
 
 function App() {
   return (
@@ -36,7 +39,7 @@ function App() {
               </div>
             </div>
           </div>
-        </div>  
+        </div>
       </header>
 
       {/* Conteúdo Principal */}
@@ -47,27 +50,27 @@ function App() {
           <h2>Trilhas Adiquiridas</h2>
           <Carousel autoPlay infiniteLoop showThumbs={false} showStatus={false} centerMode centerSlidePercentage={25} emulateTouch swipeable>
             <div>
-              <img src={img1} alt="Livro 1" />
+              <Image src={img1} alt="Livro 1" />
               <p className="legend">Comunicação Assertiva</p>
               <button>Entar</button>
             </div>
             <div>
-              <img src={img2} alt="Livro 2" />  
+              <Image src={img2} alt="Livro 2" />
               <p className="legend">Resiliência</p>
               <button>Entrar</button>
             </div>
             <div>
-              <img src={img3} alt="Livro 3" />
+              <Image src={img3} alt="Livro 3" />
               <p className="legend">Inteligência Emocional</p>
               <button>Entrar</button>
             </div>
             <div>
-              <img src={img4} alt="Livro 4" />
+              <Image src={img4} alt="Livro 4" />
               <p className="legend">Ética De Trabalho</p>
               <button>Entrar</button>
             </div>
             <div>
-              <img src={img5} alt="Livro 5" />
+              <Image src={img5} alt="Livro 5" />
               <p className="legend">Trabalho Em Equipe</p>
               <button>Entrar</button>
             </div>
@@ -78,33 +81,33 @@ function App() {
           <h2>Adquira Novas Trilhas</h2>
           <Carousel autoPlay infiniteLoop showThumbs={false} showStatus={false} centerMode centerSlidePercentage={25} emulateTouch swipeable>
             <div>
-              <img src={img6} alt="Objetivo 1" />
+              <Image src={img6} alt="Objetivo 1" />
               <p className="legend">Gerenciamento De Tempo</p>
               <button>Entar</button>
             </div>
             <div>
-              <img src={img7} alt="Objetivo 2" />
+              <Image src={img7} alt="Objetivo 2" />
               <p className="legend">Liderança</p>
               <button>Entar</button>
             </div>
             <div>
-              <img src={img8} alt="Objetivo 3" />
+              <Image src={img8} alt="Objetivo 3" />
               <p className="legend">Negociação</p>
               <button>Entar</button>
             </div>
             <div>
-              <img src={img9} alt="Objetivo 4" />
+              <Image src={img9} alt="Objetivo 4" />
               <p className="legend">Pensamento Crítico</p>
               <button>Entar</button>
             </div>
             <div>
-              <img src={img10} alt="Objetivo 5" />
+              <Image src={img10} alt="Objetivo 5" />
               <p className="legend">Pensamento Criativo</p>
               <button>Entar</button>
             </div>
           </Carousel>
         </section>
-        
+
 
         {/* Segunda parte: Seleção de Opções */}
         {/* <section className="options-section">

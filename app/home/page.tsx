@@ -7,12 +7,17 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import '../home/App.css';
 
+  const onCardClick = (item) => {
+    const formattedTitle = item.title.toLowerCase().replace(/\s+/g, '-'); // Converte para URL amigável
+    router.push(`/page/${formattedTitle}`);
+  };
+
 const Carousel = ({ images }) => {
   return (
     <div className="w-full max-w-full mt-4">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={20}
+        spaceBetween={20} 
         slidesPerView={3}
         navigation
         pagination={{ clickable: true }}
@@ -22,20 +27,23 @@ const Carousel = ({ images }) => {
           640: { slidesPerView: 2 },
           1024: { slidesPerView: 3 },
         }}
-        className="rounded-lg shadow-xl"
+        className="rounded-lg shadow-none"
       >
         {images.map((item, index) => (
           <SwiperSlide key={index} className="flex flex-col items-center">
-            <div className="bg-white p-6 rounded-lg shadow-md text-center">
-              <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
-              <img
-                src={item.src}
-                alt={item.title}
-                className="w-48 h-48 flex items-center justify-center overflow-hidden rounded-full mx-auto mb-4"
-              />
-              <p className="text-sm text-gray-600">{item.description}</p>
-            </div>
-          </SwiperSlide>
+          <button 
+            className="p-6 rounded-lg shadow-md text-center bg-gradient-to-b from-gray-200 via-white via-50% to-gray-200 w-full"
+            onClick={() => onCardClick(item)}
+          >
+            <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
+            <img
+              src={item.src}
+              alt={item.title}
+              className="w-48 h-48 flex items-center justify-center overflow-hidden rounded-full mx-auto mb-4"
+            />
+            <p className="text-sm text-gray-600">{item.description}</p>
+          </button>
+        </SwiperSlide>
         ))}
       </Swiper>
     </div>
@@ -108,13 +116,20 @@ const HomePage = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-grow flex flex-col items-center bg-gray-100 p-6">
-        <h3 className="text-lg font-semibold text-gray-800">Adquirido</h3>
+      <main className="flex-grow flex flex-col items-center bg-whith p-6 space-y-8">
+        <h3 className="text-lg font-semibold text-black self-start w-full pl-6 mt-6">Adquirido</h3>
         <Carousel images={carouselAdiquirido} />
-        <h3 className="text-lg font-semibold text-gray-800">Sugestão</h3>
+        <h3 className="text-lg font-semibold text-black self-start w-full pl-6">Sugestão</h3>
         <Carousel images={carouselSugestao} />
-        <h3 className="text-lg font-semibold text-gray-800">Sugestão</h3>
+        <h3 className="text-lg font-semibold text-black self-start w-full pl-6">Sugestão</h3>
         <Carousel images={carousel3} />
+        <h3 className="text-lg font-semibold text-black self-start w-full pl-6">Adquirido</h3>
+        <Carousel images={carouselAdiquirido} />
+        <h3 className="text-lg font-semibold text-black self-start w-full pl-6">Sugestão</h3>
+        <Carousel images={carouselSugestao} />
+        <h3 className="text-lg font-semibold text-black self-start w-full pl-6">Sugestão</h3>
+        <Carousel images={carousel3} />
+        
       </main>
       <Footer />
     </div>

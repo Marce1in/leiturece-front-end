@@ -2,43 +2,36 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
-
-const registerUserSchema = z
-  .object({
-    name: z
-      .string()
-      .min(1, "Nome é obrigatório")
-      .max(64, "Nome não pode ser maior que 64 caracteres"),
-    email: z
-      .string()
-      .email("E-mail Inválido")
-      .min(1, "E-mail é obrigatório")
-      .max(255, "E-mail não pode ser maior que 255 caracteres"),
-    password: z
-      .string()
-      .min(4, "A senha deve ser maior que 4 caracteres")
-      .max(1024, "Senha MUITO longa"),
-    passconf: z.string().min(1, "A confirmação de senha é obrigatória"),
-  })
-  .refine(({ password, passconf }) => password === passconf, {
-    message: "Senhas não são iguais",
-    path: ["passconf"],
-  });
-
-type RegisterUserSchema = z.infer<typeof registerUserSchema>;
+import {
+  RegisterUserType,
+  registerUserSchema,
+} from "@/lib/fetchApi/zodTypesSchemas/auth";
+import { useMutation } from "@tanstack/react-query";
+import { postRegister } from "@/lib/fetchApi/fetchAuth";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export default function RegisterPage() {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterUserSchema>({
+  } = useForm<RegisterUserType>({
     resolver: zodResolver(registerUserSchema),
   });
 
-  function handleRegister(data: RegisterUserSchema) {
-    console.log(data);
+  const createAccount = useMutation({
+    mutationFn: (data: RegisterUserType) => postRegister(data),
+  });
+
+  function handleRegister(data: RegisterUserType) {
+    createAccount.mutate(data);
+  }
+
+  if (createAccount.isSuccess) {
+    router.push("/login");
+    toast.success("Conta criada com sucesso");
   }
 
   return (
@@ -47,6 +40,7 @@ export default function RegisterPage() {
         <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">
           Registro
         </h1>
+
         <form onSubmit={handleSubmit(handleRegister)}>
           <div className="mb-6">
             <label className="block text-sm font-semibold text-gray-700">
@@ -58,6 +52,7 @@ export default function RegisterPage() {
                 placeholder="Digite seu nome"
               />
             </label>
+
             {errors.name && (
               <p className="text-red-500 text-sm font-semibold">
                 {errors.name.message}
@@ -75,6 +70,7 @@ export default function RegisterPage() {
                 placeholder="Digite seu e-mail"
               />
             </label>
+
             {errors.email && (
               <p className="text-red-500 text-sm font-semibold">
                 {errors.email.message}
@@ -92,6 +88,7 @@ export default function RegisterPage() {
                 placeholder="Digite sua senha"
               />
             </label>
+
             {errors.password && (
               <p className="text-red-500 text-sm font-semibold">
                 {errors.password.message}
@@ -109,6 +106,7 @@ export default function RegisterPage() {
                 placeholder="Confirme sua senha"
               />
             </label>
+
             {errors.passconf && (
               <p className="text-red-500 text-sm font-semibold">
                 {errors.passconf.message}
@@ -119,9 +117,20 @@ export default function RegisterPage() {
           <button
             type="submit"
             className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold shadow-md transition duration-300"
+            disabled={createAccount.isPending}
           >
-            Registrar
+            {createAccount.isPending ? (
+              <div className="w-6 h-6 border-2 border-t-transparent border-blue-500 rounded-full animate-spin"></div>
+            ) : (
+              "Registrar"
+            )}
           </button>
+
+          {createAccount.isError && (
+            <p className="text-red-500 text-sm font-semibold">
+              {createAccount.error.message}
+            </p>
+          )}
         </form>
 
         <p className="mt-6 text-sm text-center text-gray-700">

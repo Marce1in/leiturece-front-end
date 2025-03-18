@@ -1,6 +1,6 @@
-"use client"
+"use client";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { toast } from "sonner";
 import FullScreenLoading from "./FullScreenLoading";
 
@@ -10,16 +10,21 @@ interface RedirectComponentProps {
 }
 
 export default function RedirectComponent(props: RedirectComponentProps) {
-  const { path, message } = props
-
+  const { path, message } = props;
   const router = useRouter();
+  const hasRedirected = useRef(false);
 
   useEffect(() => {
+    if (hasRedirected.current) {
+      return;
+    }
+    hasRedirected.current = true;
+
     router.push(path);
-    if (message){
+    if (message) {
       toast.error(message);
     }
   }, []);
 
-  return <FullScreenLoading />
+  return <FullScreenLoading />;
 }

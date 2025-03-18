@@ -1,8 +1,9 @@
-'use client';
-import React from 'react';
-import Header from '../../components/Header';
+"use client";
+import React from "react";
+import Header from "../../components/Header";
+import withAuth from "@/lib/withAuth";
 
-export default function SobrePage() {
+function SobrePage() {
   return (
     <div className="min-h-screen bg-gray-100 text-gray-800">
       <Header />
@@ -11,24 +12,32 @@ export default function SobrePage() {
           Sobre o Leiturece
         </h1>
         <p className="text-lg text-gray-600 text-center max-w-3xl mx-auto mb-12">
-          O Leiturece é uma plataforma que transforma o aprendizado corporativo através de trilhas de conhecimento personalizadas. 
-          Usando os melhores livros, conectamos teoria à prática, ajudando empresas e equipes a alcançar seus objetivos de forma eficiente e estruturada.
+          O Leiturece é uma plataforma que transforma o aprendizado corporativo
+          através de trilhas de conhecimento personalizadas. Usando os melhores
+          livros, conectamos teoria à prática, ajudando empresas e equipes a
+          alcançar seus objetivos de forma eficiente e estruturada.
         </p>
         <div className="grid md:grid-cols-2 gap-12">
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold text-black mb-4">Nossa Missão</h2>
             <p className="text-gray-600">
-              Capacitar equipes e organizações através de trilhas de conhecimento que combinam aprendizado prático e teórico, promovendo crescimento sustentável e resultados tangíveis.
+              Capacitar equipes e organizações através de trilhas de
+              conhecimento que combinam aprendizado prático e teórico,
+              promovendo crescimento sustentável e resultados tangíveis.
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-bold text-black mb-4">Nossa Visão</h2>
             <p className="text-gray-600">
-              Ser a plataforma número um em aprendizado corporativo, ajudando empresas a desenvolver talentos e alcançar excelência organizacional.
+              Ser a plataforma número um em aprendizado corporativo, ajudando
+              empresas a desenvolver talentos e alcançar excelência
+              organizacional.
             </p>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold text-black mb-4">Nossos Valores</h2>
+            <h2 className="text-2xl font-bold text-black mb-4">
+              Nossos Valores
+            </h2>
             <ul className="list-disc list-inside text-gray-600">
               <li>Aprendizado contínuo</li>
               <li>Inovação</li>
@@ -37,9 +46,14 @@ export default function SobrePage() {
             </ul>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold text-black mb-4">Por que escolher o Leiturece?</h2>
+            <h2 className="text-2xl font-bold text-black mb-4">
+              Por que escolher o Leiturece?
+            </h2>
             <p className="text-gray-600">
-              Porque acreditamos que o aprendizado é a chave para o sucesso. Nossa plataforma torna o aprendizado acessível, eficiente e relevante, conectando sua equipe ao conhecimento necessário para prosperar.
+              Porque acreditamos que o aprendizado é a chave para o sucesso.
+              Nossa plataforma torna o aprendizado acessível, eficiente e
+              relevante, conectando sua equipe ao conhecimento necessário para
+              prosperar.
             </p>
           </div>
         </div>
@@ -47,3 +61,5 @@ export default function SobrePage() {
     </div>
   );
 }
+
+export default withAuth(SobrePage);

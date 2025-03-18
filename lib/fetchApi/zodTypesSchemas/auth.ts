@@ -22,4 +22,17 @@ export const registerUserSchema = z
     path: ["passconf"],
   });
 
+export const loginUserSchema = z.object({
+  email: z
+    .string()
+    .email("E-mail Inválido")
+    .min(1, "E-mail é obrigatório")
+    .max(255, "E-mail não pode ser maior que 255 caracteres"),
+  password: z
+    .string()
+    .min(4, "A senha deve ser maior que 4 caracteres")
+    .max(1024, "Senha MUITO longa"),
+});
+
 export type RegisterUserType = z.infer<typeof registerUserSchema>;
+export type LoginUserType = z.infer<typeof loginUserSchema>;

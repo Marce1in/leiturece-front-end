@@ -1,6 +1,5 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
 import { useForm } from "react-hook-form";
 import {
   RegisterUserType,
@@ -10,6 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { postRegister } from "@/lib/fetchApi/fetchAuth";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import Spinner from "@/components/Spinner";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -23,15 +23,14 @@ export default function RegisterPage() {
 
   const createAccount = useMutation({
     mutationFn: (data: RegisterUserType) => postRegister(data),
+    onSuccess: () => {
+      router.push("/confirmar-email");
+      toast.success("Conta criada com sucesso, verifique seu E-mail");
+    },
   });
 
   function handleRegister(data: RegisterUserType) {
     createAccount.mutate(data);
-  }
-
-  if (createAccount.isSuccess) {
-    router.push("/login");
-    toast.success("Conta criada com sucesso");
   }
 
   return (
@@ -44,7 +43,7 @@ export default function RegisterPage() {
         <form onSubmit={handleSubmit(handleRegister)}>
           <div className="mb-6">
             <label className="block text-sm font-semibold text-gray-700">
-              Nome:
+              Nome Completo
               <input
                 {...register("name")}
                 type="text"
@@ -62,7 +61,7 @@ export default function RegisterPage() {
 
           <div className="mb-6">
             <label className="block text-sm font-semibold text-gray-700">
-              Email:
+              Email
               <input
                 {...register("email")}
                 type="email"
@@ -80,7 +79,7 @@ export default function RegisterPage() {
 
           <div className="mb-6">
             <label className="block text-sm font-semibold text-gray-700">
-              Senha:
+              Senha
               <input
                 {...register("password")}
                 type="password"
@@ -98,7 +97,7 @@ export default function RegisterPage() {
 
           <div className="mb-6">
             <label className="block text-sm font-semibold text-gray-700">
-              Confirmar Senha:
+              Confirmar Senha
               <input
                 {...register("passconf")}
                 type="password"
@@ -116,18 +115,14 @@ export default function RegisterPage() {
 
           <button
             type="submit"
-            className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold shadow-md transition duration-300"
+            className={`flex justify-center items-center w-full py-3 ${createAccount.isError ? "bg-red-500 hover:bg-red-600" : "bg-blue-600 hover:bg-blue-700"} text-white rounded-lg font-semibold shadow-md transition duration-300`}
             disabled={createAccount.isPending}
           >
-            {createAccount.isPending ? (
-              <div className="w-6 h-6 border-2 border-t-transparent border-blue-500 rounded-full animate-spin"></div>
-            ) : (
-              "Registrar"
-            )}
+            {createAccount.isPending ? <Spinner /> : "Registrar"}
           </button>
 
           {createAccount.isError && (
-            <p className="text-red-500 text-sm font-semibold">
+            <p className="text-red-500 pt-3 text-sm font-semibold text-center">
               {createAccount.error.message}
             </p>
           )}

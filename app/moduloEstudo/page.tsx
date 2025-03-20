@@ -4,6 +4,7 @@ import '../home/App.css';
 import { useState } from "react";
 import { ChevronDown, ChevronUp, Circle } from "lucide-react";
 
+const doc = '/documents/aula1.pdf';
 
 const Header = () => (
   <header className="header">
@@ -44,25 +45,35 @@ const Footer = () => (
 const MainContent = ({ contentTracks, openTracks, toggleTrack }) => (
   <main className="relative flex-grow flex justify-between items-start p-6 bg-white">
   {/* O conteúdo principal */}
-  <div className="w-full sm:w-2/5 md:w-1/3 lg:w-1/4 bg-gray-200 p-6 rounded-lg shadow mt-8 mr-6 mb-12 sm:mt-12 sm:mr-8 ml-[200px]">
-    <div className="mb-6">
-      <p className="text-lg font-medium">Trilhas de Liderança</p>
-      <p className="text-sm text-gray-600">25 conteúdos</p>
-      <p className="text-sm text-gray-600">Expira em 24/03/25</p>
-    </div>
-    <div className="mb-6">
-      <p className="text-lg text-gray-600">Não esqueça de marcar a aula como vista</p>
-    </div>
+  <div className="w-full sm:w-3/5 md:w-2/3 lg:w-1/2 xl:w-2/5 bg-gray-200 p-6 rounded-lg shadow mt-8 mr-6 mb-12 sm:mt-12 sm:mr-8 ml-[80px]">
+  <section className="video-section text-center">
+    <h1 className="text-xl font-bold mb-4">Liderança Aula 1</h1>
+    <iframe 
+      width="100%" 
+      height="400" 
+      src="https://www.youtube.com/embed/yntso82TPO8" 
+      title="YouTube Video Player" 
+      frameBorder="0" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      allowFullScreen
+    ></iframe>
+  </section>
+  <section className="intro-section mt-6">
+    <h3 className="text-lg font-semibold">Resumo</h3>
+    <p className="text-gray-700 text-center">
+      Somos o que somos porque nos conectamos. A conexão é a essência de quem somos... Somos o que somos porque nos conectamos. A conexão é a essência de quem somos... Somos o que somos porque nos conectamos. A conexão é a essência de quem somos... Somos o que somos porque nos conectamos. A conexão é a essência de quem somos... Somos o que somos porque nos conectamos. A conexão é a essência de quem somos... Somos o que somos porque nos conectamos. A conexão é a essência de quem somos... Somos o que somos porque nos conectamos. A conexão é a essência de quem somos...Somos o que somos porque nos conectamos. A conexão é a essência de quem somos...
+    </p>
+  </section>
+  <section className="download-section mt-6 flex flex-col items-center justify-center text-center">
+    <h3 className="text-lg font-semibold mb-4">Baixe o Documento de Apoio</h3>
+    <a href={doc} download className="inline-block bg-black text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:bg-gray-800 hover:shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-black">
+      Download
+    </a>
+  </section>
+</div>
 
-    {/* Barra de progresso */}
-    <div className="w-full">
-      <p className="text-lg font-medium">Progresso do Aluno</p>
-      <div className="w-full bg-gray-300 rounded-full h-2 mt-2">
-        <div className="bg-blue-500 h-2 rounded-full" style={{ width: '70%' }}></div> {/* Progresso ajustável */}
-      </div>
-      <p className="text-sm text-gray-600 mt-2">70% Concluído</p>
-    </div>
-  </div>
+
+
 
   {/* Menu de trilhas */}
   <div className="w-full sm:w-2/5 md:w-3/10 lg:w-2/5 bg-gray-100 rounded-lg shadow-lg mt-8 sm:mt-12 mr-[120px]">
@@ -100,15 +111,6 @@ const MainContent = ({ contentTracks, openTracks, toggleTrack }) => (
         </div>
       ))}
     </div>
-  </div>
-
-  {/* Nova div fixa dentro do main */}
-  <div className="absolute bottom-[18vh] left-[203px] w-full sm:w-full md:w-2/3 lg:w-1/3 bg-gray-200 p-6 rounded-lg shadow-lg z-10">
-    <p className="text-xl font-semibold text-center">Descrição Da Trilha</p>
-    <p className="text-lg text-gray-600 mt-4">Esta trilha de liderança visa desenvolver líderes eficazes, equipando-os com as competências e conhecimentos necessários para inspirar, motivar e guiar equipes, impulsionando o sucesso individual e organizacional.Esta trilha de liderança visa desenvolver líderes eficazes, equipando-os com as competências e conhecimentos necessários para inspirar, motivar e guiar equipes, impulsionando o sucesso individual e organizacional. 
-    Esta trilha de liderança visa desenvolver líderes eficazes, equipando-os com as competências e conhecimentos necessários para inspirar, motivar e guiar equipes, impulsionando o sucesso individual e organizacional. 
- 
-    </p>
   </div>
 </main>
 );
@@ -208,6 +210,3 @@ const HomePage = () => {
 };
 
 export default HomePage;
-
-
-

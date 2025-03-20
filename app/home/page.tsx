@@ -12,44 +12,45 @@ import '../home/App.css';
     router.push(`/page/${formattedTitle}`);
   };
 
-const Carousel = ({ images }) => {
-  return (
-    <div className="w-full max-w-full mt-4">
-      <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={20} 
-        slidesPerView={3}
-        navigation
-        pagination={{ clickable: true }}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
-        breakpoints={{
-          320: { slidesPerView: 1 },
-          640: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
-        }}
-        className="rounded-lg shadow-none"
-      >
-        {images.map((item, index) => (
-          <SwiperSlide key={index} className="flex flex-col items-center">
-          <button 
-            className="p-6 rounded-lg shadow-md text-center bg-gradient-to-b from-gray-200 via-white via-50% to-gray-200 w-full"
-            onClick={() => onCardClick(item)}
-          >
-            <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
-            <img
-              src={item.src}
-              alt={item.title}
-              className="w-48 h-48 flex items-center justify-center overflow-hidden rounded-full mx-auto mb-4"
-            />
-            <p className="text-sm text-gray-600">{item.description}</p>
-          </button>
-        </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
-  );
-};
-
+  const Carousel = ({ images }) => {
+    return (
+      <div className="w-full max-w-full mt-4">
+        <Swiper
+          modules={[Navigation, Pagination, Autoplay]}
+          spaceBetween={20} 
+          slidesPerView={3}
+          navigation
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          breakpoints={{
+            320: { slidesPerView: 1 },
+            640: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+          className="rounded-lg shadow-none"
+        >
+          {images.map((item, index) => (
+            <SwiperSlide key={index} className="flex flex-col items-center">
+              <button 
+                className="p-6 rounded-lg shadow-md text-center bg-gradient-to-b from-white via-gray-50 to-gray-200 w-full"
+                onClick={() => onCardClick(item)}
+              >
+                <h3 className="text-lg font-semibold text-gray-800">{item.title}</h3>
+                <img
+                  src={item.src}
+                  alt={item.title}
+                  className="w-48 h-48 flex items-center justify-center overflow-hidden rounded-full mx-auto mb-4"
+                />
+                <p className="text-sm text-gray-600">{item.description}</p>
+              </button>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+    );
+  };
+  
+  
 const Header = () => (
   <header className="header">
         <img src="image" className="logo" alt="LeitureCe"/>
